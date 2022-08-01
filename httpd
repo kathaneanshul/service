@@ -1,0 +1,23 @@
+port=80/tcp
+configuration file "/etc/httpd/congf/httpd.conf"
+deployment page  "/var/www/html/index.html"
+
+
+
+steps of server side
+ping 8.8.8.8          ----network is on/off
+ping <ip>            ------client ip is connected or not
+yum install httpd       -----download service
+cd /var/www/html         ----create a file to host the machine
+vim index.html             ----file and massgae to write
+systemctl start httpd
+systemctl enable httpd
+systemctl ststus httpd
+firewall-cmd --add-service=http --permante
+firewall-cmd --reload --permante
+firewall-cmd --list-all
+firewall-cmd --add-port=80/tcp --permante
+firewall-cmd --reload 
+firewall-cmd --list-all
+steps of cilent side
+curl <ip address of server machine>

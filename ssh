@@ -1,0 +1,35 @@
+port=22
+configuratin file "/etc/ssh/sshd_config"
+
+
+steps of server side 
+useradd
+password
+su -<username>
+ssh-keygen                    ---it will genrate automatic keys 1.public(id_rsa.pub) 2.private(id_rsa)
+cd  .ssh
+ls
+cat id_rsa.pub > authorized_keys
+ll
+scp id_rsa <username>@<ip of client>:<directory name>
+systemctl restart sshd
+
+steps of client side
+cd <directory name>
+ls
+ssh -i id_rsa <user name>@<ip of server>
+
+
+for port forwarding
+server side steps
+
+/etc/ssh/sshd_config        ----change port number in configuration file
+semanage port -a -t ssh_port_t -p tcp <port number>
+firewall-cmd --add-forward-port=port=22:proto=tcp:toport=<number> --permanent
+firewall-cmd --reload 
+systemctl restart sshd
+
+cilent side steps
+cd <directory>
+ls
+ssh -i id_rsa <usernmae>@<ip of server>
